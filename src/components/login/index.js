@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Flex, Box, Heading } from '@chakra-ui/react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import './Login.css';
 
 const handleSignInClick = () => {
@@ -20,7 +20,7 @@ export const Login = () => {
               onClick={handleSignInClick}
               colorScheme="blue"
               size="lg"
-              leftIcon={<FaGithub />}
+              leftIcon={<FaGoogle />}
               width="full"
               mt={4}
               rounded={'full'}
