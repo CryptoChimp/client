@@ -20,8 +20,7 @@ export const Logout = () => {
           Log out of CryptoChimp?
         </Heading>
         <Text colorScheme={'gray'} maxW={'sm'} textAlign="center">
-          You can always log back in at any time. If you just want to switch
-          accounts.
+          You can always log back in at any time.
         </Text>
         <Center>
           <Stack spacing={6} direction={'row'} paddingTop="20px">
