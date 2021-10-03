@@ -20,6 +20,8 @@ import { Link as ReachLink } from '@reach/router';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link as ReactLink } from 'react-router-dom';
 
+import { ToggleTheme } from './ToggleTheme';
+
 const NavLink = ({ children, to }) => (
   <Link
     px={2}
@@ -65,6 +67,7 @@ export const Navbar = ({ main }) => {
           </HStack>
           <Flex alignItems={'center'}>
             <Menu>
+              <ToggleTheme />
               <MenuButton
                 as={Button}
                 rounded={'full'}
