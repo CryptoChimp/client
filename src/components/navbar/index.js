@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -21,6 +21,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link as ReactLink } from 'react-router-dom';
 
 import { ToggleTheme } from './ToggleTheme';
+import { fetchCurrentUser } from '../../util/api';
 
 const NavLink = ({ children, to }) => (
   <Link
@@ -40,6 +41,17 @@ const NavLink = ({ children, to }) => (
 
 export const Navbar = ({ main }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    fetchCurrentUser()
+      .then((res) => {
+        setUser(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -75,17 +87,10 @@ export const Navbar = ({ main }) => {
                 cursor={'pointer'}
                 minW={0}
               >
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
+                <Avatar size={'sm'} src={user.avatar} />
               </MenuButton>
               <MenuList>
-                <ReactLink to="/profile">
-                  <MenuItem>Profile</MenuItem>
-                </ReactLink>
+                <MenuItem>{user.displayName}</MenuItem>
                 <MenuDivider />
                 <ReactLink to="/logout">
                   <MenuItem>Log out</MenuItem>
