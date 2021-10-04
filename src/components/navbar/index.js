@@ -15,15 +15,15 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Heading,
+  Center,
 } from '@chakra-ui/react';
-import { Link as ReachLink } from '@reach/router';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link as ReactLink, useHistory } from 'react-router-dom';
 
 import { ToggleTheme } from './ToggleTheme';
-import { fetchCurrentUser } from '../../util/api';
 
-const NavLink = ({ children, to }) => (
+const NavLink = ({ children }) => (
   <Link
     px={2}
     py={1}
@@ -32,26 +32,39 @@ const NavLink = ({ children, to }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    as={ReachLink}
-    to={to}
   >
     {children}
   </Link>
 );
 
-export const Navbar = ({ main }) => {
+export const Navbar = ({ main, title }) => {
+  let history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    fetchCurrentUser()
-      .then((res) => {
-        setUser(res);
+    const fetchCurrentUser = () =>
+      fetch(process.env.REACT_APP_API_HOME, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+        .then((res) => {
+          if (res.status === 401) {
+            history.push('/');
+          }
+          return res.json();
+        })
+        .then((res) => {
+          setUser(res);
+        });
+
+    fetchCurrentUser();
+  }, [history]);
 
   return (
     <>
@@ -71,10 +84,21 @@ export const Navbar = ({ main }) => {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
             >
-              <NavLink to="/browse">Browse</NavLink>
-              <NavLink to="/wallet">Wallet</NavLink>
-              <NavLink to="/buy">Buy</NavLink>
-              <NavLink to="/sell">Sell</NavLink>
+              <ReactLink to="/browse">
+                <NavLink>Browse</NavLink>
+              </ReactLink>
+
+              <ReactLink to="/wallet">
+                <NavLink>Wallet</NavLink>
+              </ReactLink>
+
+              <ReactLink to="/buy">
+                <NavLink>Buy</NavLink>
+              </ReactLink>
+
+              <ReactLink to="/sell">
+                <NavLink>Sell</NavLink>
+              </ReactLink>
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -103,16 +127,31 @@ export const Navbar = ({ main }) => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              <NavLink to="/browse">Browse</NavLink>
-              <NavLink to="/wallet">Wallet</NavLink>
-              <NavLink to="/buy">Buy</NavLink>
-              <NavLink to="/sell">Sell</NavLink>
+              <ReactLink to="/browse">
+                <NavLink>Browse</NavLink>
+              </ReactLink>
+
+              <ReactLink to="/wallet">
+                <NavLink>Wallet</NavLink>
+              </ReactLink>
+
+              <ReactLink to="/buy">
+                <NavLink>Buy</NavLink>
+              </ReactLink>
+
+              <ReactLink to="/sell">
+                <NavLink>Sell</NavLink>
+              </ReactLink>
             </Stack>
           </Box>
         ) : null}
       </Box>
 
-      <Box p={4}>{main}</Box>
+      <Center pt={12} pb={4}>
+        <Heading fontSize={'4xl'}>{title}</Heading>
+      </Center>
+
+      <Box p={8}>{main}</Box>
     </>
   );
 };
