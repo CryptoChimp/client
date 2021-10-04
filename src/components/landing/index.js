@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Flex,
   Container,
@@ -7,11 +7,32 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Illustration } from './Illustration';
 
 export const Landing = () => {
+  let history = useHistory();
+
+  useEffect(() => {
+    const fetchCurrentUser = () =>
+      fetch(process.env.REACT_APP_API_HOME, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Credentials': true,
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          history.push('/browse');
+        }
+      });
+
+    fetchCurrentUser();
+  }, [history]);
+
   return (
     <Container maxW={'5xl'}>
       <Stack
