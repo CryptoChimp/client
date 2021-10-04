@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Spinner, Button } from '@chakra-ui/react';
+import { Spinner, Button, Center } from '@chakra-ui/react';
 
 import { CoinTable } from './CoinTable';
 
@@ -31,16 +31,26 @@ export const Browse = () => {
 
   return (
     <div>
-      {loading ? <Spinner /> : <CoinTable coins={coins} />}
+      {loading ? (
+        <Center>
+          <Spinner size="lg" />
+        </Center>
+      ) : (
+        <CoinTable coins={coins} />
+      )}
+
+      <br></br>
 
       {totalPages !== page && (
-        <Button
-          colorScheme="blue"
-          variant="ghost"
-          onClick={() => setPage(page + 1)}
-        >
-          {loading ? 'Loading...' : 'Load More'}
-        </Button>
+        <Center>
+          <Button
+            colorScheme="blue"
+            variant="ghost"
+            onClick={() => setPage(page + 1)}
+          >
+            {loading ? 'Loading...' : 'Load More'}
+          </Button>
+        </Center>
       )}
     </div>
   );
