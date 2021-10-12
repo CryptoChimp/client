@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Flex,
   Box,
@@ -6,7 +7,7 @@ import {
   Stack,
   Button,
   useColorModeValue,
-  Select,
+  Input,
   NumberInput,
   NumberInputStepper,
   NumberInputField,
@@ -14,7 +15,18 @@ import {
   NumberDecrementStepper,
 } from '@chakra-ui/react';
 
+import { buyCoin } from '../../api';
+
 export const Buy = () => {
+  const [symbol, setSymbol] = useState('');
+  const [quantity, setQuantity] = useState();
+
+  const onSubmit = () => {
+    console.log(symbol);
+    console.log(quantity);
+    buyCoin(symbol, quantity);
+  };
+
   return (
     <Flex align={'center'} justify={'center'}>
       <Box
@@ -26,14 +38,11 @@ export const Buy = () => {
         <Stack spacing={4}>
           <FormControl id="symbol">
             <FormLabel>Symbol</FormLabel>
-            <Select placeholder="Coin symbol">
-              <option>Bitcoin</option>
-              <option>Dogecoin</option>
-            </Select>
+            <Input type="text" onChange={(e) => setSymbol(e.target.value)} />
           </FormControl>
           <FormControl id="quantity">
             <FormLabel>Quantity</FormLabel>
-            <NumberInput min={1}>
+            <NumberInput min={1} onChange={(e) => setQuantity(e)}>
               <NumberInputField />
               <NumberInputStepper>
                 <NumberIncrementStepper />
@@ -48,6 +57,7 @@ export const Buy = () => {
               _hover={{
                 bg: 'blue.500',
               }}
+              onClick={onSubmit}
             >
               Buy
             </Button>
