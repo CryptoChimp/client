@@ -23,7 +23,7 @@ const buyCoin = async (symbol, quantity) => {
       return res[0].price;
     });
 
-  fetch(`${process.env.REACT_APP_API}/user/buy`, {
+  return await fetch(`${process.env.REACT_APP_API}/user/buy`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -36,7 +36,7 @@ const buyCoin = async (symbol, quantity) => {
       quantity: quantity,
       price: price,
     }),
-  });
+  }).then((res) => res.json());
 };
 
 export { fetchCurrentUser, buyCoin };

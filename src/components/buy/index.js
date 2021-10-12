@@ -13,16 +13,25 @@ import {
   NumberInputField,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  useToast,
 } from '@chakra-ui/react';
 
 import { buyCoin } from '../../api';
 
 export const Buy = () => {
+  const toast = useToast();
+
   const [symbol, setSymbol] = useState('');
   const [quantity, setQuantity] = useState();
 
-  const onSubmit = () => {
-    buyCoin(symbol.toUpperCase(), quantity);
+  const onSubmit = async () => {
+    const res = await buyCoin(symbol.toUpperCase(), quantity);
+
+    toast({
+      title: res.message,
+      status: res.status,
+      isClosable: true,
+    });
   };
 
   return (
