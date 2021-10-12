@@ -15,7 +15,13 @@ const buyCoin = async (symbol, quantity) => {
 
   const price = await fetch(URL)
     .then((res) => res.json())
-    .then((res) => res[0].price);
+    .then((res) => {
+      if (res.length === 0) {
+        return 0;
+      }
+
+      return res[0].price;
+    });
 
   fetch(`${process.env.REACT_APP_API}/user/buy`, {
     method: 'POST',
