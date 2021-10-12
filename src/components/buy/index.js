@@ -20,12 +20,17 @@ import { buyCoin } from '../../api';
 
 export const Buy = () => {
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
 
   const [symbol, setSymbol] = useState('');
   const [quantity, setQuantity] = useState();
 
   const onSubmit = async () => {
+    setLoading(true);
+
     const res = await buyCoin(symbol.toUpperCase(), quantity);
+
+    setLoading(false);
 
     toast({
       title: res.message,
@@ -58,16 +63,20 @@ export const Buy = () => {
             </NumberInput>
           </FormControl>
           <Stack spacing={10}>
-            <Button
-              bg={'blue.400'}
-              color={'white'}
-              _hover={{
-                bg: 'blue.500',
-              }}
-              onClick={onSubmit}
-            >
-              Buy
-            </Button>
+            {loading ? (
+              <Button isLoading colorScheme="blue" variant="solid"></Button>
+            ) : (
+              <Button
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                }}
+                onClick={onSubmit}
+              >
+                Buy
+              </Button>
+            )}
           </Stack>
         </Stack>
       </Box>
