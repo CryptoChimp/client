@@ -8,13 +8,11 @@ import {
   Button,
   useColorModeValue,
   Select,
-  useToast,
 } from '@chakra-ui/react';
 
-import { fetchCurrentUser } from '../../api';
+import { fetchCurrentUser, sellCoin } from '../../api';
 
 export const Sell = () => {
-  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [ownedCoins, setOwnedCoins] = useState([]);
   const [symbol, setSymbol] = useState('');
@@ -23,15 +21,10 @@ export const Sell = () => {
     e.preventDefault();
     setLoading(true);
 
-    // const res = await sellCoin(symbol.toUpperCase(), quantity);
+    await sellCoin(symbol);
 
     setLoading(false);
-
-    // toast({
-    //   title: res.message,
-    //   status: res.status,
-    //   isClosable: true,
-    // });
+    window.location.reload(false);
   };
 
   useEffect(() => {
