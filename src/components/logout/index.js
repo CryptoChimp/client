@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Logout.css';
 
 const handleLogoutClick = () => {
-  window.open(`${process.env.REACT_APP_API_HOME}/auth/logout`, '_self');
+  window.open(`${process.env.REACT_APP_API}/auth/logout`, '_self');
 };
 
 export const Logout = () => {

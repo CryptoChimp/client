@@ -22,6 +22,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link as ReactLink, useHistory } from 'react-router-dom';
 
 import { ToggleTheme } from './ToggleTheme';
+import { fetchCurrentUser } from '../../api';
 
 const NavLink = ({ children }) => (
   <Link
@@ -43,27 +44,16 @@ export const Navbar = ({ main, title }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const fetchCurrentUser = () =>
-      fetch(process.env.REACT_APP_API_HOME, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': true,
-        },
+    fetchCurrentUser()
+      .then((res) => {
+        if (res.status === 401) {
+          history.push('/');
+        }
+        return res.json();
       })
-        .then((res) => {
-          if (res.status === 401) {
-            history.push('/');
-          }
-          return res.json();
-        })
-        .then((res) => {
-          setUser(res);
-        });
-
-    fetchCurrentUser();
+      .then((res) => {
+        setUser(res);
+      });
   }, [history]);
 
   return (

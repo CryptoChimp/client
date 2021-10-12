@@ -10,27 +10,17 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 
 import { Illustration } from './Illustration';
+import { fetchCurrentUser } from '../../api';
 
 export const Landing = () => {
   let history = useHistory();
 
   useEffect(() => {
-    const fetchCurrentUser = () =>
-      fetch(process.env.REACT_APP_API_HOME, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Credentials': true,
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          history.push('/browse');
-        }
-      });
-
-    fetchCurrentUser();
+    fetchCurrentUser().then((res) => {
+      if (res.status === 200) {
+        history.push('/browse');
+      }
+    });
   }, [history]);
 
   return (

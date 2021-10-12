@@ -4,7 +4,7 @@ import { FaGoogle } from 'react-icons/fa';
 import './Login.css';
 
 const handleSignInClick = () => {
-  window.open(`${process.env.REACT_APP_API_HOME}/auth/google`, '_self');
+  window.open(`${process.env.REACT_APP_API}/auth/google`, '_self');
 };
 
 export const Login = () => {
