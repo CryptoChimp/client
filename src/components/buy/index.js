@@ -22,9 +22,7 @@ export const Buy = () => {
   const [quantity, setQuantity] = useState();
 
   const onSubmit = () => {
-    console.log(symbol);
-    console.log(quantity);
-    buyCoin(symbol, quantity);
+    buyCoin(symbol.toUpperCase(), quantity);
   };
 
   return (
