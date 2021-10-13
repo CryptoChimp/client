@@ -62,4 +62,53 @@ const sellCoin = async (symbol) => {
   }).then((res) => res.json());
 };
 
-export { fetchCurrentUser, buyCoin, sellCoin };
+/*
+const calculateWalletData = async (wallet) => {
+  const baseUrl = 'https://api.nomics.com/v1/currencies/ticker';
+  const newWallet = [];
+
+  for (const coin of wallet) {
+    const { symbol, quantity, amountInvested } = coin;
+    const URL = `${baseUrl}?key=${process.env.REACT_APP_NOMICS_API_KEY}&ids=${symbol}&interval=1d`;
+
+    const currentPrice = fetch(URL)
+      .then((res) => res.json())
+      .then((res) => res[0].price);
+
+    const profit = currentPrice * quantity - amountInvested;
+    const profitPct = (profit / amountInvested) * 100;
+
+    const newCoin = {
+      symbol,
+      quantity,
+      amountInvested: amountInvested.toFixed(2),
+      currentPrice: currentPrice,
+      profit: profit.toFixed(2),
+      profitPct: profitPct.toFixed(2),
+    };
+
+    newWallet.push(newCoin);
+  }
+
+  return await Promise.all(newWallet);
+};
+ */
+
+const fetchCoinPrices = async (coins) => {
+  let promises = [];
+  const baseUrl = 'https://api.nomics.com/v1/currencies/ticker';
+
+  for (const coin of coins) {
+    promises.push(
+      fetch(
+        `${baseUrl}?key=${process.env.REACT_APP_NOMICS_API_KEY}&ids=${coin.symbol}&interval=1d`
+      )
+        .then((res) => res.json())
+        .then((res) => res[0].price)
+    );
+  }
+
+  return await Promise.all(promises);
+};
+
+export { fetchCurrentUser, buyCoin, sellCoin, fetchCoinPrices };

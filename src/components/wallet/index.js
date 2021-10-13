@@ -2,22 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from '@chakra-ui/react';
 
 import { Cash } from './Cash';
-import { fetchCurrentUser } from '../../api';
+import { fetchCurrentUser, fetchCoinPrices } from '../../api';
 import { WalletTable } from './WalletTable';
 
 export const Wallet = () => {
   const [user, setUser] = useState({});
+  const [wallet, setWallet] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    const getWalletData = async () => {
+      setLoading(true);
 
-    fetchCurrentUser()
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-        setLoading(false);
-      });
+      const fetchedUser = await fetchCurrentUser();
+      const userJson = await fetchedUser.json();
+
+      console.log(await fetchCoinPrices(userJson.wallet));
+
+      // const fetchedWallet = await calculateWalletData(userJson.wallet);
+
+      setUser(userJson);
+      setLoading(false);
+    };
+
+    getWalletData();
   }, []);
 
   return (
