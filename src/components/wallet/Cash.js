@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Stack, HStack, Text } from '@chakra-ui/react';
+import { Box, Stack, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
 
 export const Cash = ({ amount }) => {
   return (
-    <Stack textAlign="center">
+    <Stack>
       <Box
         mb={4}
         shadow="base"
@@ -11,18 +11,11 @@ export const Cash = ({ amount }) => {
         alignSelf={{ base: 'center', lg: 'flex-start' }}
         borderRadius={'xl'}
       >
-        <Box py={4} px={12}>
-          <Text fontWeight="500" fontSize="2xl">
-            Cash
-          </Text>
-          <HStack justifyContent="center">
-            <Text fontSize="3xl" fontWeight="400">
-              $
-            </Text>
-            <Text fontSize="5xl" fontWeight="600">
-              {amount}
-            </Text>
-          </HStack>
+        <Box p={4}>
+          <Stat>
+            <StatLabel>Cash</StatLabel>
+            <StatNumber>${amount}</StatNumber>
+          </Stat>
         </Box>
       </Box>
     </Stack>
