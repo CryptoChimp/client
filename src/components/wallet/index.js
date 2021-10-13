@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { TopStocks } from './TopStocks';
+
 export const Wallet = () => {
-  return <h1>Hello</h1>;
+  return <TopStocks />;
 };
