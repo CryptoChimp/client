@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { TopStocks } from './TopStocks';
+import { Flex, Box } from '@chakra-ui/react';
+
+import { Cash } from './Cash';
 
 export const Wallet = () => {
-  return <TopStocks />;
+  return <Cash cash={4500} />;
 };
