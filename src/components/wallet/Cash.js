@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Stack, HStack, Text } from '@chakra-ui/react';
 
-export const Cash = ({ cash }) => {
+export const Cash = ({ amount }) => {
   return (
     <Stack textAlign="center">
       <Box
@@ -20,7 +20,7 @@ export const Cash = ({ cash }) => {
               $
             </Text>
             <Text fontSize="5xl" fontWeight="600">
-              {cash}
+              {amount}
             </Text>
           </HStack>
         </Box>
