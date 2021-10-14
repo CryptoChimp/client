@@ -7,6 +7,7 @@ import {
   Stack,
   Flex,
   Center,
+  Heading,
 } from '@chakra-ui/react';
 import { FcAssistant, FcDonate, FcInTransit } from 'react-icons/fc';
 
@@ -35,6 +36,9 @@ export const Features = () => {
   return (
     <Center>
       <Box p={4} maxW={'5xl'}>
+        <Heading as="h1" fontSize="4xl" textAlign="center" pb={16}>
+          Features
+        </Heading>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
           <Feature
             icon={<Icon as={FcAssistant} w={10} h={10} />}
