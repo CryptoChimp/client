@@ -81,8 +81,6 @@ const getCoinPrices = async (ids) => {
     `${baseUrl}?key=${process.env.REACT_APP_NOMICS_API_KEY}&ids=${ids}&interval=1d`
   ).then((res) => res.json());
 
-  console.log(coins);
-
   for (const coin of coins) {
     prices.push(coin.price);
   }
