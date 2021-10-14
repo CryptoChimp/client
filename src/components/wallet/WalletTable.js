@@ -25,12 +25,15 @@ export const WalletTable = ({ coins }) => {
           {coins.map((coin) => {
             return (
               <Tr key={uuid.v4()}>
-                <Td>BTC</Td>
-                <Td isNumeric>{2}</Td>
-                <Td isNumeric>${4569.32}</Td>
-                <Td isNumeric>${209.12}</Td>
-                <Td isNumeric color={12.4 < 0 ? 'red.400' : 'green.400'}>
-                  {12.4}%
+                <Td>{coin.symbol}</Td>
+                <Td isNumeric>{coin.quantity}</Td>
+                <Td isNumeric>${coin.amountInvested}</Td>
+                <Td isNumeric>${coin.currentPrice}</Td>
+                <Td
+                  isNumeric
+                  color={coin.profitPct < 0 ? 'red.400' : 'green.400'}
+                >
+                  {coin.profitPct}%
                 </Td>
               </Tr>
             );

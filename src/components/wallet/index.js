@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spinner } from '@chakra-ui/react';
 
 import { Cash } from './Cash';
-import { fetchCurrentUser, fetchCoinPrices } from '../../api';
+import { fetchCurrentUser, calculateWalletData } from '../../api';
 import { WalletTable } from './WalletTable';
 
 export const Wallet = () => {
@@ -17,10 +17,9 @@ export const Wallet = () => {
       const fetchedUser = await fetchCurrentUser();
       const userJson = await fetchedUser.json();
 
-      console.log(await fetchCoinPrices(userJson.wallet));
+      const fetchedWallet = await calculateWalletData(userJson.wallet);
 
-      // const fetchedWallet = await calculateWalletData(userJson.wallet);
-
+      setWallet(fetchedWallet);
       setUser(userJson);
       setLoading(false);
     };
@@ -40,7 +39,7 @@ export const Wallet = () => {
         }
       />
 
-      <WalletTable coins={[1]} />
+      <WalletTable coins={wallet} />
     </div>
   );
 };
