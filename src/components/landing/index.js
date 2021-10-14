@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { fetchCurrentUser } from '../../api';
 import { Hero } from './Hero';
-import { Features } from './Features';
+import { Footer } from './Footer';
 
 export const Landing = () => {
   let history = useHistory();
@@ -19,7 +19,7 @@ export const Landing = () => {
   return (
     <>
       <Hero />
-      <Features />
+      <Footer />
     </>
   );
 };
