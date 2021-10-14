@@ -62,26 +62,39 @@ const sellCoin = async (symbol) => {
   }).then((res) => res.json());
 };
 
-const fetchCoinPrices = async (coins) => {
-  let promises = [];
-  const baseUrl = 'https://api.nomics.com/v1/currencies/ticker';
+const getCoinListString = (wallet) => {
+  const coinIds = [];
 
-  for (const coin of coins) {
-    promises.push(
-      fetch(
-        `${baseUrl}?key=${process.env.REACT_APP_NOMICS_API_KEY}&ids=${coin.symbol}&interval=1d`
-      )
-        .then((res) => res.json())
-        .then((res) => res[0].price)
-    );
+  for (const coin of wallet) {
+    coinIds.push(coin.symbol);
   }
 
-  return await Promise.all(promises);
+  return coinIds.toString();
 };
 
-const calculateWalletData = async (wallet) => {
+const getCoinPrices = async (ids) => {
+  const prices = [];
+
+  const baseUrl = 'https://api.nomics.com/v1/currencies/ticker';
+
+  const coins = await fetch(
+    `${baseUrl}?key=${process.env.REACT_APP_NOMICS_API_KEY}&ids=${ids}&interval=1d`
+  ).then((res) => res.json());
+
+  console.log(coins);
+
+  for (const coin of coins) {
+    prices.push(coin.price);
+  }
+
+  return prices;
+};
+
+const fetchWalletData = async (wallet) => {
   const newWallet = [];
-  const prices = await fetchCoinPrices(wallet);
+
+  const ids = getCoinListString(wallet);
+  const prices = await getCoinPrices(ids);
 
   for (let i = 0; i < wallet.length; i++) {
     const { symbol, quantity, amountInvested } = wallet[i];
@@ -106,10 +119,4 @@ const calculateWalletData = async (wallet) => {
   return newWallet;
 };
 
-export {
-  fetchCurrentUser,
-  buyCoin,
-  sellCoin,
-  fetchCoinPrices,
-  calculateWalletData,
-};
+export { fetchCurrentUser, buyCoin, sellCoin, fetchWalletData };
