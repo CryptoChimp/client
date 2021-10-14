@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td, Box } from '@chakra-ui/react';
-import uuid from 'uuid';
 
 export const WalletTable = ({ coins }) => {
   return (
@@ -24,7 +23,7 @@ export const WalletTable = ({ coins }) => {
         <Tbody>
           {coins.map((coin) => {
             return (
-              <Tr key={uuid.v4()}>
+              <Tr key={coin.symbol}>
                 <Td>{coin.symbol}</Td>
                 <Td isNumeric>{coin.quantity}</Td>
                 <Td isNumeric>${coin.amountInvested}</Td>
