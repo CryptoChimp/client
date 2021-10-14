@@ -53,7 +53,9 @@ export const Sell = () => {
                 width={56}
               >
                 {ownedCoins.map((ownedCoin) => {
-                  return <option>{ownedCoin.symbol}</option>;
+                  return (
+                    <option key={ownedCoin.symbol}>{ownedCoin.symbol}</option>
+                  );
                 })}
               </Select>
             </FormControl>
