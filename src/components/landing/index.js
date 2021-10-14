@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { fetchCurrentUser } from '../../api';
 import { Hero } from './Hero';
+import { Features } from './Features';
 
 export const Landing = () => {
   let history = useHistory();
@@ -18,6 +19,7 @@ export const Landing = () => {
   return (
     <>
       <Hero />
+      <Features />
     </>
   );
 };
