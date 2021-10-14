@@ -24,7 +24,7 @@ import { Link as ReactLink, useHistory } from 'react-router-dom';
 import { ToggleTheme } from './ToggleTheme';
 import { fetchCurrentUser } from '../../api';
 
-const NavLink = ({ children }) => (
+const NavLink = ({ children, to }) => (
   <Link
     px={2}
     py={1}
@@ -33,6 +33,8 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
+    as={ReactLink}
+    to={to}
   >
     {children}
   </Link>
@@ -74,21 +76,10 @@ export const Navbar = ({ main, title }) => {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
             >
-              <ReactLink to="/browse">
-                <NavLink>Browse</NavLink>
-              </ReactLink>
-
-              <ReactLink to="/wallet">
-                <NavLink>Wallet</NavLink>
-              </ReactLink>
-
-              <ReactLink to="/buy">
-                <NavLink>Buy</NavLink>
-              </ReactLink>
-
-              <ReactLink to="/sell">
-                <NavLink>Sell</NavLink>
-              </ReactLink>
+              <NavLink to="/browse">Browse</NavLink>
+              <NavLink to="/wallet">Wallet</NavLink>
+              <NavLink to="/buy">Buy</NavLink>
+              <NavLink to="/sell">Sell</NavLink>
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -117,21 +108,10 @@ export const Navbar = ({ main, title }) => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              <ReactLink to="/browse">
-                <NavLink>Browse</NavLink>
-              </ReactLink>
-
-              <ReactLink to="/wallet">
-                <NavLink>Wallet</NavLink>
-              </ReactLink>
-
-              <ReactLink to="/buy">
-                <NavLink>Buy</NavLink>
-              </ReactLink>
-
-              <ReactLink to="/sell">
-                <NavLink>Sell</NavLink>
-              </ReactLink>
+              <NavLink to="/browse">Browse</NavLink>
+              <NavLink to="/wallet">Wallet</NavLink>
+              <NavLink to="/buy">Buy</NavLink>
+              <NavLink to="/sell">Sell</NavLink>
             </Stack>
           </Box>
         ) : null}
