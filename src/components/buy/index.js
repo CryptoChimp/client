@@ -15,13 +15,15 @@ import {
   NumberDecrementStepper,
   useToast,
 } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
 
 import { buyCoin } from '../../api';
 
 export const Buy = () => {
+  let history = useHistory();
   const toast = useToast();
-  const [loading, setLoading] = useState(false);
 
+  const [loading, setLoading] = useState(false);
   const [symbol, setSymbol] = useState('');
   const [quantity, setQuantity] = useState();
 
@@ -38,6 +40,8 @@ export const Buy = () => {
       status: res.status,
       isClosable: true,
     });
+
+    history.push('/wallet');
   };
 
   return (
