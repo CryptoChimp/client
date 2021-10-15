@@ -10,7 +10,7 @@ export const Browse = () => {
 
   const totalPages = 10;
 
-  const perPage = 50;
+  const perPage = 10;
   const baseUrl = 'https://api.nomics.com/v1/currencies/ticker';
   const URL = `${baseUrl}?key=${process.env.REACT_APP_NOMICS_API_KEY}&per-page=${perPage}&page=${page}&interval=1d`;
 
@@ -21,7 +21,7 @@ export const Browse = () => {
       fetch(URL)
         .then((res) => res.json())
         .then((res) => {
-          setCoins(res);
+          setCoins([...coins, ...res]);
           setLoading(false);
         });
     };
@@ -31,13 +31,7 @@ export const Browse = () => {
 
   return (
     <div>
-      {loading ? (
-        <Center>
-          <Spinner size="lg" />
-        </Center>
-      ) : (
-        <CoinTable coins={coins} />
-      )}
+      <CoinTable coins={coins} />
 
       <br></br>
 
@@ -48,7 +42,7 @@ export const Browse = () => {
             variant="ghost"
             onClick={() => setPage(page + 1)}
           >
-            {loading ? 'Loading...' : 'Load More'}
+            {loading ? <Spinner size="md" /> : 'Load More'}
           </Button>
         </Center>
       )}
