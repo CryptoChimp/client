@@ -21,11 +21,10 @@ export const Hero = () => {
             CryptoChimp
           </Text>
         </Heading>
-        <Text color="gray.500" maxW={'2xl'}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta
-          minus molestiae vel beatae natus eveniet ratione temporibus aperiam
-          harum alias officiis assumenda officia quibusdam deleniti eos
-          cupiditate.
+        <Text color="gray.500" maxW={'xl'}>
+          CryptoChimp is the easiest place to buy and sell cryptocurrency. Sign
+          up and get started today. Discover how specific cryptocurrencies work
+          — and get a bit of each crypto to try out for yourself.
         </Text>
         <Stack spacing={6} direction={'row'}>
           <Link to="/login">
