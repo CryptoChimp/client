@@ -24,7 +24,7 @@ export const Logout = () => {
         </Text>
         <Center>
           <Stack spacing={6} direction={'row'} paddingTop="20px">
-            <Link to="/home">
+            <Link to="/browse">
               <Button rounded={'full'} px={6}>
                 Cancel
               </Button>
