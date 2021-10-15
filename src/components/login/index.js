@@ -1,11 +1,8 @@
 import React from 'react';
-import { Button, Flex, Box, Heading } from '@chakra-ui/react';
-import { FaGoogle } from 'react-icons/fa';
-import './Login.css';
+import { Flex, Box, Heading } from '@chakra-ui/react';
 
-const handleSignInClick = () => {
-  window.open(`${process.env.REACT_APP_API}/auth/google`, '_self');
-};
+import './Login.css';
+import { GoogleButton } from './GoogleButton';
 
 export const Login = () => {
   return (
@@ -16,17 +13,7 @@ export const Login = () => {
             <Heading>Log in to CryptoChimp</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <Button
-              onClick={handleSignInClick}
-              colorScheme="blue"
-              size="lg"
-              leftIcon={<FaGoogle />}
-              width="full"
-              mt={4}
-              rounded={'full'}
-            >
-              Google
-            </Button>
+            <GoogleButton />
           </Box>
         </Box>
       </Flex>
