@@ -3,7 +3,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 
 export const CoinTable = ({ coins }) => {
   return (
-    <div>
+    <>
       <Table variant="simple">
         <Thead>
           <Tr>
@@ -41,6 +41,6 @@ export const CoinTable = ({ coins }) => {
           })}
         </Tbody>
       </Table>
-    </div>
+    </>
   );
 };

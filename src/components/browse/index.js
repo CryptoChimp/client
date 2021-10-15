@@ -30,7 +30,7 @@ export const Browse = () => {
   }, [URL]);
 
   return (
-    <div>
+    <>
       <CoinTable coins={coins} />
 
       <br></br>
@@ -46,6 +46,6 @@ export const Browse = () => {
           </Button>
         </Center>
       )}
-    </div>
+    </>
   );
 };

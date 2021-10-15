@@ -27,7 +27,7 @@ export const Wallet = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Cash
         amount={
           loading ? (
@@ -39,6 +39,6 @@ export const Wallet = () => {
       />
 
       <WalletTable coins={wallet} />
-    </div>
+    </>
   );
 };
